@@ -1,6 +1,9 @@
+import { prependToMemberExpression } from '@babel/types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import FigureCard from '../presentational/FigureCard'
+import FigureCard from '../functional/FigureCard.js';
+import MovesContainer from './MovesContainer.js'
+import MessageScreen from '../functional/MessageScreen.js';
 
 const mapStateToProps = (state) => {
     return { battle: state.battle, moves: state.moves }
@@ -10,7 +13,7 @@ const mapStateToProps = (state) => {
 class BattleCard extends Component{
 
   renderBattleCards = (props) => {
-    return props.battle.map( (battler) => (
+    return props.battle.figures.map( (battler) => (
       <div className="BattlerCard" key={battler.id}>                                      
         <div className= "Stat Card">
           <FigureCard info={battler}/>
@@ -23,10 +26,27 @@ class BattleCard extends Component{
     ))
   }
 
+  render_moves_or_messages = (props) => {
+    if(props.battle_details.whoseTurn = "user"){
+      <div className="MovesContainer">
+        <MovesContainer />
+      </div>
+    }
+    else{
+      <div className="MessageContainer">
+        <MessageScreen props={this.props.battle} />
+      </div>
+    }
+  }
+
   render(){
+    return(
     <div className={"BattleContainer"}>
-      {this.renderBattleCards(this.props)}
+      <div className= "FiguresContainer">
+        {this.renderBattleCards(this.props)}
+      </div>
     </div>
+    )
   }
 }
 
