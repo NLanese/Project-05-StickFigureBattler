@@ -1,0 +1,36 @@
+.ConfirmBox{
+    width: 600px;
+    height: 800px;
+    border: 10px solid blue;
+    left: 3000px;
+    background-color: bisque;
+}
+.SelectedFigure{
+    top: 0%;
+    position: absolute;
+    height: 600px;
+    width: 500px;
+}
+img {
+    height: 504px;
+    width: 450px;
+}
+p{
+    font-size: 18
+}
+h3#confirmation{
+    position: absolute;
+    top: 120px;
+}
+button{
+    position: absolute;
+    top: 195px
+}
+#yes{
+    position: absolute;
+    left: 10px;
+}
+#no{
+    position: absolute;
+    left: 65px;
+}

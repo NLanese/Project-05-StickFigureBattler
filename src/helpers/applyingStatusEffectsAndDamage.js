@@ -2,6 +2,7 @@ import returnStatDmg from "./returnStatDmg"
 
 export default function applyingStatusEffectandDamage(state, damage, action){
 
+    // ASSIGNS THE GLOBAL VALUES
     let selected = null
     let other = null
     let selectedObj = null
@@ -28,15 +29,26 @@ export default function applyingStatusEffectandDamage(state, damage, action){
 
     // DECLARES A PROMPT ARRAY
     let prompt_array = [`${selected.name} ${damageDirection} ${damage} hit points!`, null, null, null, null]
+
+
     switch(action){
         //  IF THE EFFECT IS A BOOST OR DECREASE INSTEAD OF STATUS EFFECT - BELOW
         case(effect.includes("increase")):
         case(effect.includes("decrease")):
-        let effect = action.effect
+
+            // sets needed third party values
+            let effect = action.effect
             let modifier = 0
+
+            // Determines whether stats increase of decrease
             if (effect.includes("increase")){ modifier = 1 }
             else{ modifier = -1 }
+
+            // Turns the effect string into an array
             let effect_array = effect.split("-")
+
+            // Turns the effect array into actual values assigned to each stat
+            // example: "increase-atk-atk-def" would increase atk by 2 def by 1
             let upObj = {atk: 0, def: 0, sAtk: 0, sDef: 0}
             effect_array.forEach( (word) => {
                 switch(word){
@@ -50,8 +62,10 @@ export default function applyingStatusEffectandDamage(state, damage, action){
                         upObj.sDef += (1 * modifier) 
             }})
             //  IF THE EFFECT IS A BOOST OR DECREASE INSTEAD OF STATUS EFFECT - ABOVE
-            // ________________________________________________________________________
+
+            // ___________________________________________________________________________________________
             //
+
             //  CREATES A PROMPT ARRAY TO DISPLAY ON THE MESSAGE SCREEN - BELOW //
             //                     also modifies state changes                  //
             let i = 1 

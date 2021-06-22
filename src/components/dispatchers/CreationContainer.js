@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import figures from '../../helpers/list_of_figures';
 import YourNameField from '../functional/YourNameField';
 import HeroSelection from '../containers/HeroSelection';
-
+import './CreationContainer.css'
 
 //  ACTIONS - BELOW  //
+    //  Submits name from YourNameField Component
 function sendUserName(content){
-    return {type: 'CREATE_USER_NAME', payload: content}
+    let nameObj = {type: 'CREATE_USER_NAME', payload: content}
+    return nameObj
 }
+    // Submits the figure name to state, takes figured that was clicked on from HereSelection Component
 function submitPlayerFigure(figureObj){
-    return {type: 'CREATE_USER_FIGURE', user_figure: figureObj} 
+    return {type: 'CREATE_USER_FIGURE', figure: figureObj} 
+}
+function selectedFigure(figureName){
+    return {type: 'SELECT_USER_FIGURE', figureName: figureName}
 }
 //  ACTIONS - ABOVE //
 
 //  CONNECT and PROVIDER FUNCTIONS - BELOW  //
 const mapDispatchToProps = (dispatch) => {
-    return {
-        enterName: (content) => { dispatch(sendUserName(content)) },
-        createPlayerFigure: (obj) => { dispatch(submitPlayerFigure(obj)) }
-    }
+    return({
+        enterName: (content) =>  dispatch(sendUserName(content)),
+        chooseFigure: (name) => dispatch(selectedFigure(name)),
+        createPlayerFigure: (obj) =>  dispatch(submitPlayerFigure(obj)) 
+    })
 }
 //  CONNECT and PROVIDER FUNCTIONS - ABOVE  //
   
@@ -33,7 +39,7 @@ class CreationContainer extends Component{
                     <YourNameField name_dispatch={this.props.enterName} />
                 </div>
                 <div class="Figure-Selector">
-                    <HeroSelection />
+                    <HeroSelection choose_figure={this.props.chooseFigure} submit_figure={this.props.createPlayerFigure}/>
                 </div>
             </div>
         )
@@ -42,5 +48,6 @@ class CreationContainer extends Component{
 }
 
 export default connect(
+    null,
     mapDispatchToProps
 )(CreationContainer)

@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
-import getImage from '../../helpers/getImage'
+import Picture from './Picture'
+import './FigureCard.css'
 
 const FigureCard = (props) => {
+    const imageSrc = props.info.title
     return(
         <div className="figureStats">
-            <h3>Name: {props.name}</h3>
-            <h2>Type(s): {props.class_type}</h2>
-            <p>Atk: {props.atk} || sAtk: {props.sAtk}</p>
-            <p>Def: {props.def} || sDef: {props.sDef}</p>
-            <p>Spd: {props.spd}</p>
-            <img src={getImage(props)} />
+            <h3>Name: {props.info.title} </h3>
+            <div id="inBattlePic">
+                <Picture name={imageSrc} />
+            </div>
+            <h2>Type(s): {props.info.type}</h2>
+            <p>Atk: {props.info.atk} || sAtk: {props.info.sAtk} || Def: {props.info.def} || sDef: {props.info.sDef} || Spd: {props.info.spd}</p>
         </div>
     )
 }

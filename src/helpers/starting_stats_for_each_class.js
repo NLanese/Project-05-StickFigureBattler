@@ -1,43 +1,51 @@
 const base_stats = {
-    knight: {
+    knight: {       //60points
         hp: 110,
         spd: 5,
-        atk: 12,
-        def: 12,
-        sAtk: 6,
-        sDef: 9
+        atk: 14,
+        def: 13,
+        sAtk: 7,
+        sDef: 10
     },
-    madScientist: {
-        hp: 75,
-        spd: 8,
-        atk: 7,
+    madScientist: { //60points
+        hp: 70,
+        spd: 9,
+        atk: 9,
         def: 10,
         sAtk: 14,
         sDef: 11
     },
-    martian: {
+    martian: {      //60points
         hp: 80,
         spd: 11,
         atk: 5,
         def: 7,
-        sAtk: 19,
-        sDef: 15
+        sAtk: 16,
+        sDef: 13
     },
-    pirateGuy: {
+    pirateGuy: {    //60points
         hp: 100,
         spd: 9,
         atk: 14,
-        def: 8,
+        def: 7,
         sAtk: 13,
-        sDef: 8
+        sDef: 7
     },
-    robot: {
+    robot: {        //60points
         hp: 80,
         spd: 4,
         atk: 10,
-        def: 14,
+        def: 16,
         sAtk: 10,
-        sDef: 7
+        sDef: 11
+    },
+    secretService: {//60points
+        hp: 90,
+        spd: 8,
+        atk: 12,
+        def: 10,
+        sAtk: 10,
+        sDef: 11
     }
 }
 

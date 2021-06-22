@@ -1,0 +1,13 @@
+.Name_Field{
+    position: absolute;
+    width: 600px;
+    top: 0%;
+    border: 4px solid black;
+}
+.Figure-Selector{
+    position: absolute;
+    width: 1800px;
+    height: 600px;
+    top: 200px;
+    bottom: 100%;
+}

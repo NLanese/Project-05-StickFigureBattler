@@ -1,0 +1,34 @@
+.AllHeroesSelect{
+    width: 1800px;
+    height: 550px;
+    top: 190px
+}
+th{
+    top: 190px;
+    width: 260px;
+    height: 750px;
+    float: left;
+    border: 4px solid black;
+}
+#Knight{
+    float:left;
+}
+#MadScientist{
+    float:left;
+}
+#Martian{
+    float:left;
+}
+#Pirate{
+    float:left;
+}
+#Robot{
+    float:left;
+}
+#SecretService{
+    float:left;
+}
+img {
+    height: 350px;
+    width: 225px;
+}

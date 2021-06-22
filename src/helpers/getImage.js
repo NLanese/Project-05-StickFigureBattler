@@ -1,32 +1,32 @@
-export default function getImage(props){
+import knight from '../images/Knight.jpg'
+import scientist from '../images/MadScientist.jpg'
+import martian from '../images/Martian.jpg'
+import pirate from '../images/PirateGuy.jpg'
+import robot from '../images/Robot.jpg'
+import secretSer from '../images/SecretServiceGuy.jpg'
+import superhero from '../images/SuperHero.jpg'
+import dark from '../images/DarkFigure.jpg'
+
+export default function getImage(name){
 //  THE PROPS WILL BE AN ENTIRE FIGURE OBJECT
-    let figure = ""
-    switch(props.name){
+    switch(name){
         case("Knight"):
-            figure = require('../images/Knight.jpg')
-            return(figure)
+            return(< img src={knight} />)
         case("Mad Scientist"):
-            figure = require('../images/MadScientist.jpg')
-            return(figure)
+            return(< img src={scientist} />)
         case("Martian"):
-            figure = require('../images/Martian.jpg')
-            return(figure)
+            return(< img src={martian} />)
         case("Pirate"):
-            figure = require('../images/PirateGuy.jpg')
-            return(figure)
+            return(< img src={pirate} />)
         case("Robot"):
-            figure = require('../images/Robot.jpg')
-            return(figure)
-        case("Secret Service"):
-            figure = require('../images/SecretServiceGuy.jpg')
-            return(figure)
+            return(< img src={robot} />)
+        case("SecretService"):
+            return(< img src={secretSer} />)
         case("Superhero"):
-            figure = require('../images/SuperHero.jpg')
-            return(figure)
+            return(< img src={superhero} />)
         case("DarkFigure"):
-            figure = require('../images/DarkFigure.jpg')
-            return(figure)
-    default:
-        return "Image not found"
+            return(< img src={dark} />)
+        default:
+            return "Image not found"
     }
 }
