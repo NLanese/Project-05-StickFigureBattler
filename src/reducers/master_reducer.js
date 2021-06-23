@@ -57,7 +57,9 @@ function manageBattle(
              user: {
                  status: "none",
                  tEffected: 0,
-                 hp: 0
+                 hp: 0,
+                 // You should add tToCool to the Moves Database in Rails
+                 moves: [null]
              },
         // },
         // battle_details: {

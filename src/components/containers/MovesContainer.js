@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import Move from '../dispatchers/Move';
 
-class movesList extends Component{
+class MovesContainer extends Component{
     
+    renderMoves(moves){
+        return moves.map( (move, index) => {
+            return(
+                <div className="iMove" id={index} key={index}>
+                    <Move m={move} />
+                </div>
+            )
+        })
+    }
+
+    render(){
+        return(
+        <div className="MovesContainer">
+            {this.renderMoves(this.props.moves)}
+        </div>
+        )
+    }
 }
 
-export default movesList
+export default MovesContainer
