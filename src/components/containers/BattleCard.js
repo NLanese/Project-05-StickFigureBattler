@@ -9,19 +9,11 @@ const mapStateToProps = (state) => {
     return { battle: state.battle }
 }
 
-function oppCard_or_genButton(battle){
-    return(
-      
-    )
-  }
-}
-
-
 
 class BattleCard extends Component{
 
   renderBattleCards = (props) => {
-    console.log("Inside Battle Card")
+    console.log("Inside Battle Card, the battle state is as follows...")
     console.log(this.props.battle)
     let figuresArray = [null, null]
     let i = 0
@@ -32,25 +24,29 @@ class BattleCard extends Component{
     i = 0
     return(
       <div className="BattleEnviro"> 
+
         <div className={`BattlerCard`} id={`user`} >                                      
-          <div className= "Stat Card">
-            <FigureCard info={props.user}/>
-          </div>
-          <div className= "Healthbar">
-            <h3>Health: {props.battle.figures.user.hp}</h3>
-            <p><strong>Current Status Effect: </strong>{props.battle.figures.user.status}</p>
-          </div>
+            <div className= "Stat Card">
+              <FigureCard info={props.user}/>
+            </div>
+            <div className= "Healthbar">
+              <h3>Health: {props.battle.user.hp}</h3>
+              <p><strong>Current Status Effect: </strong>{props.battle.user.status}</p>
+            </div>
         </div>
-        <div className={`BattlerCard`} id={`battle.figureopp`} >                                      
-          <div className= "Stat Card">
-            <FigureCard info={battle.figures.opp}/>
-          </div>
-          <div className= "Healthbar">
-            <h3>Health: {props.battle.figures.opp.hp}</h3>
-            <p><strong>Current Status Effect: </strong>{props.battle.figures.opp.status}</p>
-          </div>
+
+        <div className={`BattlerCard`} id={`opp`} >                                      
+            <div className= "Stat Card">
+              <FigureCard info={props.opp}/>
+            </div>
+            <div className= "Healthbar">
+              <h3>Health: {props.battle.opp.hp}</h3>
+              <p><strong>Current Status Effect: </strong>{props.battle.opp.status}</p>
+            </div>
+        </div>
+
       </div>
-    )
+      )
   }
 
   render_moves_or_messages = (props) => {

@@ -24,7 +24,9 @@ h3#confirmation{
 }
 button{
     position: absolute;
-    top: 195px
+    top: 195px;
+    width: 40px;
+    height: 22px;
 }
 #yes{
     position: absolute;

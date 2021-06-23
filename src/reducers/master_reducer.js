@@ -39,6 +39,7 @@ function manageBattle(
              opp: {
                  created: false,
                  name: "",
+                 title: "",
                  id: null,                       // See Above
                  hp: 0,
                  type: null,
@@ -74,9 +75,23 @@ function manageBattle(
             let figure = action.payload
             return {...state, figures: {...state.figures, user: {...state.figures.user, name:figure.name, hp: figure.hp, type: figure.type, level: figure.level, atk: figure.atk, def: figure.def, sDef: figure.sDef, sAtk: figure.sAtk, spd: figure.spd, hp: figure.hp }}}
 
-    // action {type: 'LOAD_BATTLE'}   
-        case'LOAD_BATTLE':
-            return {...state, battle_details: {...state.battle_details, loading: true}}
+    // action {type: 'START_BATTLE', oppo: <opponent object> user: <user object)}   
+        case 'START_BATTLE':
+            console.log(action)
+            let whoStarts = ""
+            let opponent = action.oppo
+            opponent = {...opponent, created: true, title: opponent.name}
+            if (action.user.spd >= action.oppo.spd){
+                whoStarts = "user"
+            }
+            else{
+                whoStarts = "opp"
+            }
+            return {...state, opp: opponent, loading: false, whoseTurn: whoStarts}
+
+    // action {type: 'LOAD_BATTLE'}
+        case 'LOAD_BATTLE':
+            return {...state, loading: true}       
 
         case 'CHANGE_USER_HP':
             // action = {type: "CHANGE_OPP_HP", amount: {Number generated in Event Listener inside of Moves}, effect: {String generated in Event Listener} }
@@ -93,7 +108,8 @@ function manageBattle(
         case 'COMPLETE_BATTLE':
             // CHANGE PROMPT, RESET USER HP, LEVEL UP
             return state
-        
+
+                    
         default:
             return state;
     }

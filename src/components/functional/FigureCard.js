@@ -3,6 +3,8 @@ import Picture from './Picture'
 import './FigureCard.css'
 
 const FigureCard = (props) => {
+    console.log("Figure Card Props")
+    console.log(props)
     const imageSrc = props.info.title
     return(
         <div className="figureStats">
