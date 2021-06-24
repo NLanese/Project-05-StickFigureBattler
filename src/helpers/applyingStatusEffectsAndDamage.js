@@ -1,31 +1,6 @@
 import returnStatDmg from "./returnStatDmg"
 
-export default function applyingStatusEffectandDamage(state, damage, action){
-
-    // ASSIGNS THE GLOBAL VALUES
-    let selected = null
-    let other = null
-    let selectedObj = null
-    let otherObj = null
-
-    // ASSIGNS selected AND other
-    if (state.figures[0].id == state.battle_details.this_move_target_id){
-        selected = state.figures[0]
-        other = state.figures[1]
-    }
-    else{
-        selected = state.figures[1]
-        other = state.figures[0]
-    }
-
-    // DETERMINES IF THIS WAS A BOOST OR AN ATTACK
-    let damageDirection = "Lost" 
-    if (damage < 0){
-        damageDirection = "Gained"
-    }
-    else{
-        damage = damage * -1
-    }
+export default function applyingStatusEffectandDamage(state, moveObj){
 
     // DECLARES A PROMPT ARRAY
     let prompt_array = [`${selected.name} ${damageDirection} ${damage} hit points!`, null, null, null, null]

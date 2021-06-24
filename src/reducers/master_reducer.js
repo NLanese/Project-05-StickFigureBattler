@@ -96,9 +96,9 @@ function manageBattle(
             return {...state, loading: true}       
 
         case 'CHANGE_USER_HP':
-            // action = {type: "CHANGE_OPP_HP", amount: {Number generated in Event Listener inside of Moves}, effect: {String generated in Event Listener} }
+            // action = {type: "CHANGE_OPP_HP", payload: <move object> }
             let effect = action.effect
-            let newUserState = applyingStatusEffectandDamage(state, action.amount, effect)
+            let newUserState = applyingStatusEffectandDamage(state, action.payload)
             return {newUserState}
 
         case 'CHANGE_OPP_HP':

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { moveDispatcher } from '../../helpers/moveHelper';
+import { userMoveAction } from '../../helpers/moveHelper';
 
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return({
-            choosemove: (move) => dispatch(moveDispatcher(move))
+            choosemove: (move) => dispatch(userMoveAction(move))
         })
 }
 
