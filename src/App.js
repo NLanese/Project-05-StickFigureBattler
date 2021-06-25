@@ -7,7 +7,8 @@ import Loading from './components/functional/Loading';
 
 const DOMAIN = "http://localhost:3000/"
 
-function fetchOpp(user){
+function fetchOpp(props){
+  let user = props.user
   let level = user.level
   let route = ""
   if (level == 1){
@@ -23,30 +24,35 @@ function fetchOpp(user){
     dispatch({type: 'LOAD_BATTLE'})
     fetch(DOMAIN + route)
       .then(resp => resp.json())
-      .then(json => dispatch({type: 'START_BATTLE', oppo: json, user: user}))
+      .then(json => { 
+        dispatch(props.setUpUser(user))
+        return {hp: json.hp, created: true, name: json.name, title: json.title, level: json.level, type: json.class_type,
+               spd: json.spd, atk: json.atk, def: json.def, sDef: json.sDef, sAtk: json.sAtk, moves: json.moves} 
+      })
+      .then(opponent => dispatch({type: 'START_BATTLE', oppo: opponent, user: user}))
   }
 } 
 
 const mapDispatchToProps = (dispatch) => {
   return ({
     setUpUser: (figure) => dispatch({type: "SET_USER", payload: figure}),
-    setUpOpp: (level) =>  dispatch(fetchOpp(level))
+    setUpOpp: (figure) =>  dispatch(fetchOpp(figure))
   })
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user,
-           battle: state.battle }
+  return { user: state.user, battle: state.battle }
 }
 
 
 class App extends Component {
 
+  // MAKES YOU GENERATE EACH NEW BATTLE TO FETCH PROPERLY
   battle_or_genButton = (props) => {
     if (props.battle.opp.created == false){
       return(
         <div>
-          <button id="generation" onClick={props.setUpOpp(props.user)}>Generate Battle!</button>
+          <button id="generation" onClick = {() => props.setUpOpp(props)}>Generate Battle!</button>
         </div>
       )
     }
@@ -59,6 +65,7 @@ class App extends Component {
     }
   }
 
+  // IF LOADING AT ANY POINT
   intro_or_resume_or_loading = (props) => {
     if (props.user.loading === true || props.battle.loading === true){
       return(
@@ -67,6 +74,8 @@ class App extends Component {
         </div>
       )
     }
+
+    // STARTS GAME ONCE USER IS CREATED
     else if (props.user.created === true){
       return(
         <div className="BattleContainer">
@@ -74,6 +83,8 @@ class App extends Component {
         </div>
       )
     }
+
+    // BEFORE GAME, WHEN NO USER CREATED
     else{
       return(
         <div className="Create Form">

@@ -1,0 +1,18 @@
+.msg{
+    width: 480px;
+    height: 40px;
+    border: 3px solid darkgray;
+    left: 1.6%;
+    font-size: 15px;
+}
+
+.MessageScreen{
+    height: 100%;
+    width: 100%
+}
+
+.Actual{
+    position: absolute;
+    height: 100%;
+    width: 100%
+}

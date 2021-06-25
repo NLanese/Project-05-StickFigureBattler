@@ -1,0 +1,18 @@
+.iMove{
+    height: 150px;
+    width: 486px;
+    position: absolute;
+    border: 7px solid black;
+}
+#move0{
+    top: 0pxx
+}
+#move1{
+    top: 157px
+}
+#move2{
+    top: 321px
+}
+#move3{
+    top: 485px
+}

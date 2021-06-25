@@ -6,8 +6,11 @@ import MessageScreen from '../functional/MessageScreen.js';
 import './BattleCard.css'
 
 const mapStateToProps = (state) => {
-    return { battle: state.battle }
+    return { battle: state.battle,
+             user: state.user }
 }
+
+
 
 
 class BattleCard extends Component{
@@ -30,14 +33,14 @@ class BattleCard extends Component{
               <FigureCard info={props.user}/>
             </div>
             <div className= "Healthbar">
-              <h3>Health: {props.battle.user.hp}</h3>
+              <h3>Health: {props.battle.user.hp} / {props.user.hp}</h3>
               <p><strong>Current Status Effect: </strong>{props.battle.user.status}</p>
             </div>
         </div>
 
         <div className={`BattlerCard`} id={`opp`} >                                      
             <div className= "Stat Card">
-              <FigureCard info={props.opp}/>
+              <FigureCard info={props.battle.opp}/>
             </div>
             <div className= "Healthbar">
               <h3>Health: {props.battle.opp.hp}</h3>
@@ -45,29 +48,37 @@ class BattleCard extends Component{
             </div>
         </div>
 
+        <div className="DynamicDisplay">
+          {this.render_moves_or_messages(props)}        
+        </div> 
+
       </div>
       )
   }
 
   render_moves_or_messages = (props) => {
-    if(props.battle_details.whoseTurn === "user"){
-      <div className="MovesContainer">
-        <MovesContainer movesList={props.user.moves}/>
-      </div>
+    if(props.battle.move_selection === true){
+      console.log("Inside BattleCard")
+      console.log(props.user.moves)
+      return(
+        <div className="MovesContainer">
+          <MovesContainer movesList={props.user.moves}/>
+        </div>
+      )
     }
     else{
-      <div className="MessageContainer">
-        <MessageScreen props={this.props.battle} />
-      </div>
+      return(
+        <div className="MessageContainer">
+          <MessageScreen prompts={this.props.battle.prompt} />
+        </div>
+      )
     }
   }
 
   render(){
     return(
     <div className={"BattleContainer"}>
-      <div className= "FiguresContainer">
         {this.renderBattleCards(this.props)}
-      </div>
     </div>
     )
   }

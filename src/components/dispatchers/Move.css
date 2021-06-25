@@ -1,0 +1,45 @@
+#MoveCard{
+    height: 140px;
+    width: 480px;
+}
+#MovieCard#cooling{
+    background-color: lightgrey;
+}
+#MoveCard#ready{
+    background-color: lightyellow;
+}
+#name{
+    position: absolute;
+    font-size: 35px;
+    font-weight: 850;
+    top: 0%;
+    left: 3%
+}
+#type{
+    position: absolute;
+    font-size: 19px;
+    font-weight: 600;
+    top: 0%;
+    left: 60%
+}
+#dmg{
+    position: absolute;
+    font-size: 14px;
+    font-weight: 400;
+    top: 40px;
+    left: 60%  
+}
+#acc{
+    position: absolute;
+    font-size: 14px;
+    font-weight: 400;
+    top: 70px;
+    left: 60%  
+}
+#cool{
+    position: absolute;
+    font-size: 14px;
+    font-weight: 400;
+    top: 100px;
+    left: 60%  
+}
