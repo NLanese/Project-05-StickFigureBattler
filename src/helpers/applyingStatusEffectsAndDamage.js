@@ -17,10 +17,10 @@ export default function applyingStatusEffectandDamage(state, moveObj, whoIsAttac
 
     // Determines if attacker is frozen, if so he cannot attack
     if (attacker.status == "frozen"){
-        return {...returnState, prompt: returnState.prompt + `| ${attacker.name} is frozen and cannot attack!`}
+        return {...returnState, prompt: returnState.prompt + ` ${attacker.name} is frozen and cannot attack!`}
     }
     else{
-        returnState = {...returnState, prompt: returnState.prompt + `| ${attacker.name} used ${moveObj.name}`}
+        returnState = {...returnState, prompt: returnState.prompt + ` ${attacker.name} used ${moveObj.name}`}
     }
 
     // Determines if attack misses or hits, if it misses, return with only a prompt change
@@ -29,32 +29,32 @@ export default function applyingStatusEffectandDamage(state, moveObj, whoIsAttac
         missOdds = missOdds + 30
     }
     if (missOdds > moveObj.acc){
-        return {...returnState, prompt: returnState.prompt + (`| ${attacker.name}'s attack missed!`)}
+        return {...returnState, prompt: returnState.prompt + (`| ${attacker.name}'s attack missed! |`)}
     }
 
     // Handles damage
     if (moveObj.dmg >= 0){
         returnState = {...returnState, 
             [other.tag]: {...returnState[other.tag], hp: returnState[other.tag].hp - determinePoints(moveObj, attacker, other)},
-            prompt: returnState.prompt + (`| ${attacker.name} dealt ${determinePoints(moveObj, attacker, other) * -1} damage to ${other.name}!`)
+            prompt: returnState.prompt + (`| ${attacker.name} dealt ${determinePoints(moveObj, attacker, other)} damage to ${other.name}!`)
         }
     } 
     else{
         returnState = {...returnState, 
             [attacker.tag]: {...returnState[attacker.tag], hp: returnState[attacker.tag].hp - determinePoints(moveObj, attacker, attacker) },
-            prompt:  returnState.prompt + (`${attacker.name} healed ${determinePoints(moveObj, attacker, other)} damage!`)
+            prompt:  returnState.prompt + (`| ${attacker.name} healed ${determinePoints(moveObj, attacker, other) * -1} damage!`)
         }
     }
 
     // Handles any Stat Altering Effects
     if (moveObj.effect.includes("crease")){
-        returnState = handleStatChange(returnState, moveObj.effect, attacker, other)
+        returnState = handleStatChange(returnState, moveObj.effect, attacker, other, moveObj.name)
     }
 
     // Handles any Recoil Effects
     else if (moveObj.effect == "recoil"){
         returnState = { ...returnState, 
-            [attacker]: {...returnState[attacker.tag], hp: returnState[attacker.tag].hp - (determinePoints(moveObj, attacker, other) / 4) },
+            [attacker.tag]: {...returnState[attacker.tag], hp: returnState[attacker.tag].hp - (determinePoints(moveObj, attacker, other) / 4) },
             prompt:  returnState.prompt + (`${attacker.name} was dealt ${(determinePoints(moveObj, attacker, other) / 4)} damage in recoil!`)
         }
     }
@@ -66,21 +66,22 @@ export default function applyingStatusEffectandDamage(state, moveObj, whoIsAttac
 
     // All normal status effects
     else{
-        if (other.status.includes("none")){
+        if (other.status == ("none")){
             returnState = {...returnState, 
-                [other]: {...returnState[other.tag], status: moveObj.effect, tEffected: 1},
-                prompt:  returnState.prompt +  `${other.name} has a new status effect!`
+                [other.tag]: {...returnState[other.tag], status: moveObj.effect, tEffected: 1},
+                prompt:  returnState.prompt +  ` ${other.name} has a new status effect!`
             }
+            debugger
         }
     }
 
     // Handles any Clear Effects
     if (moveObj.effect == "clear"){
         returnState = {...returnState, 
-            [attacker]: {...returnState[attacker.tag], status: "none"},
+            [attacker.tag]: {...returnState[attacker.tag], status: "none"},
             prompt:  returnState.prompt +  (`${attacker.name} has been cleared of all effects!`)
         }
     }
 
-    return {...returnState, }
+    return {...returnState, prompt: returnState.prompt + "|"}
 }

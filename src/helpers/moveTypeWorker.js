@@ -1,9 +1,12 @@
 export default function moveTypeWorker(moveObj, dmg, target){
 
+    console.log(moveObj)
+    if (moveObj.name == "Tackle"){
+        moveObj.type = "athletic"
+    }
     // Weaponry Type
-    debugger
-    if (moveObj.type.includes("weaponry")){
-        if (target.type.includes("super natural")){
+    if (moveObj.type == ("weaponry")){
+        if (target.type.includes("supernatural")){
             dmg = dmg / 2
         }
         if (target.type.includes("nether")){
@@ -15,39 +18,39 @@ export default function moveTypeWorker(moveObj, dmg, target){
     }
 
     // Tech type
-    else if (moveObj.type.incudes("tech")){
+    else if (moveObj.type == ("tech")){
         if (target.type.includes("tech")){
             dmg = dmg / 2
         }
-        if (target.type.includes("athletics")){
+        if (target.type.includes("athletic")){
             dmg = dmg / 2
         }
         if (target.type.includes("stealth")){
             dmg = dmg * 2
         }
-        if (target.type.includes("super natural")){
+        if (target.type.includes("supernatural")){
             dmg = dmg * 2
         }
     }
 
     // Super Natural type
-    else if (moveObj.type.incudes("super natural")){
+    else if (moveObj.type == ("supernatural")){
         if (target.type.includes("tech")){
             dmg = dmg / 2
         }
-        if (target.type.includes("super natural")){
+        if (target.type.includes("supernatural")){
             dmg = dmg / 2
         }
         if (target.type.includes("weaponry")){
             dmg = dmg * 2
         }
-        if (target.type.includes("athletics")){
+        if (target.type.includes("athletic")){
             dmg = dmg * 2
         }
     }
 
     // Athletics type
-    else if (moveObj.type.incudes("athletics")){
+    else if (moveObj.type == ("athletic")){
         if (target.type.includes("nether")){
             dmg = dmg / 2
         }
@@ -60,11 +63,11 @@ export default function moveTypeWorker(moveObj, dmg, target){
     }
 
     // Nether type
-    else if (moveObj.type.incudes("nether")){
+    else if (moveObj.type == ("nether")){
         if (target.type.includes("weaponry")){
             dmg = dmg / 2
         }
-        if (target.type.includes("super natural")){
+        if (target.type.includes("supernatural")){
             dmg = dmg / 2
         }
         if (target.type.includes("stealth")){
@@ -76,11 +79,11 @@ export default function moveTypeWorker(moveObj, dmg, target){
     }
 
     // Stealth type
-    else if (moveObj.type.incudes("tech")){
+    else if (moveObj.type == ("tech")){
         if (target.type.includes("tech")){
             dmg = dmg / 2
         }
-        if (target.type.includes("athletics")){
+        if (target.type.includes("athletic")){
             dmg = dmg * 2
         }
         if (target.type.includes("weaponry")){

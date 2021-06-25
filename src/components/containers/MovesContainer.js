@@ -15,8 +15,6 @@ class MovesContainer extends Component{
     }
 
     render(){
-        console.log("Inside Moves Container")
-        console.log(this.props.moves)
         return(
         <div className="MovesContainer">
             {this.renderMoves(this.props.movesList)}

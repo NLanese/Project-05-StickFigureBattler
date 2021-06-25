@@ -16,3 +16,13 @@
     height: 100%;
     width: 100%
 }
+
+button.continue{
+    position: absolute;
+    top: 600px;
+    left: 40px;
+    width: 400px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 20px;
+}

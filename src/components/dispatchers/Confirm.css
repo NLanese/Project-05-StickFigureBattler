@@ -1,8 +1,9 @@
 .ConfirmBox{
+    position: absolute;
     width: 600px;
     height: 800px;
     border: 10px solid blue;
-    left: 3000px;
+    left: 300px;
     background-color: bisque;
 }
 .SelectedFigure{

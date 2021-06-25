@@ -41,44 +41,43 @@ function processMoves(moveObj, props){
     // Selects a move that the opponent uses
     let oppMoveObj = makeOppMoveSelection(opp)
 
-    // Removes the move selection screen for the message screen
+    // Removes the move selection screen for the message 
     props.initiateMoveProcess()
 
+
+    console.log("User move:")
+    console.log(moveObj)
+    console.log("Opp move:")
+    console.log(oppMoveObj)
     // If someone is using a move that moves first
     if (moveObj.effect == "move first" && oppMoveObj.effect != "move first"){
         props.executeMove(moveObj, "user")
-        setTimeout( () => { console.log("Woo we made it!") }, 10000)
         props.executeMove(oppMoveObj, "opp")
     }
     else if (oppMoveObj.effect == "move first" && moveObj.effect != "move first"){
-        props.executeMove(moveObj, "opp")
-        setTimeout( () => { console.log("Woo we made it!") }, 10000)
-        props.executeMove(oppMoveObj, "user")
+        props.executeMove(oppMoveObj, "opp")
+        props.executeMove(moveObj, "user")
     }
 
     // If someone is shocked the other goes first
     else if (opp.status == "shocked" && user.status != "shocked"){
         props.executeMove(moveObj, "user")
-        setTimeout( () => { console.log("Woo we made it!") }, 10000)
         props.executeMove(oppMoveObj, "opp")
     }
     else if (opp.status != "shocked" && user.status == "shocked"){
-        props.executeMove(moveObj, "opp")
-        setTimeout( () => { console.log("Woo we made it!") }, 10000)
-        props.executeMove(oppMoveObj, "user")
+        props.executeMove(oppMoveObj, "opp")
+        props.executeMove(moveObj, "user")
     }
 
     // Handles everything else
     else{
         if (user.spd >= opp.spd){
             props.executeMove(moveObj, "user")
-            setTimeout( () => { console.log("Woo we made it!") }, 10000)
             props.executeMove(oppMoveObj, "opp")
         }
         else{
-            props.executeMove(moveObj, "opp")
-            setTimeout( () => { console.log("Woo we made it!") }, 10000)
-            props.executeMove(oppMoveObj, "user")
+            props.executeMove(oppMoveObj, "opp")
+            props.executeMove(moveObj, "user")
         }
     }
 }
@@ -88,7 +87,7 @@ class Move extends Component{
 
     handleClick = (event, props) => {
         let indexofMove = parseInt((event.target.offsetParent.id.split("e")[1]), 10)
-        let selMove = this.props.battle.opp.moves[indexofMove]
+        let selMove = this.props.battle.user.moves[indexofMove]
         this.props.chooseMove(selMove, props)
     }
 

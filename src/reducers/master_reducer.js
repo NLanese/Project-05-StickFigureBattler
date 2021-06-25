@@ -68,6 +68,8 @@ function manageBattle(
     // action {type: 'START_BATTLE', oppo: <opponent object> user: <user object)}   
         case 'START_BATTLE':
             let opponent = action.oppo
+            opponent.status = "none"
+            opponent.tEffected = 0
             opponent = {...opponent, created: true, moves: makeOppMoveArray(opponent.moves)}
             return {...state, opp: opponent, loading: false, move_selection: true}
 
@@ -89,7 +91,8 @@ function manageBattle(
 
     // action {type: 'MOVE_PROCESS_COPLETE}
         case 'MOVE_PROCESS_COMPLETE':
-            return ({...state, move_selection: true})
+            //debugger
+            return ({...state, move_selection: true, prompt: ""})
 
         default:
             return state;

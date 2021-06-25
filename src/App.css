@@ -1,7 +1,7 @@
 #generation{
+  position: fixed;
   width: 300px;
   height: 300px;
-  margin: auto;
-  width: 50%;
-  font-size: xx-large;
+  left: 500px;
+  font-size: 50px;
 }

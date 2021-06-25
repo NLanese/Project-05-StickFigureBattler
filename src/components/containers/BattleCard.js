@@ -16,8 +16,6 @@ const mapStateToProps = (state) => {
 class BattleCard extends Component{
 
   renderBattleCards = (props) => {
-    console.log("Inside Battle Card, the battle state is as follows...")
-    console.log(this.props.battle)
     let figuresArray = [null, null]
     let i = 0
     for (const fig in props.battle.figures){
@@ -58,8 +56,6 @@ class BattleCard extends Component{
 
   render_moves_or_messages = (props) => {
     if(props.battle.move_selection === true){
-      console.log("Inside BattleCard")
-      console.log(props.user.moves)
       return(
         <div className="MovesContainer">
           <MovesContainer movesList={props.user.moves}/>

@@ -14,6 +14,9 @@ export default function makeOppMoveSelection(opp){
     else{
         let len = cooled.length
         let indexSel = Math.floor(Math.random() * len)
+        console.log("Inside opp move picker")
+        console.log(cooled)
+        console.log("Index selected: " + indexSel)
         return opp.moves[indexSel]
     }
 

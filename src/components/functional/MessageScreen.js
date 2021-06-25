@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './MessageScreen.css'
+import { connect } from 'react-redux';
 
-const MessageScreen = (props) => {
+const mapDispatchToProps = (dispatch) => {
+    return({
+        continue: () => dispatch({type: 'MOVE_PROCESS_COMPLETE'})
+    })
+}
 
-    function makeMessageDivs(props){
+
+class MessageScreen extends Component{ 
+
+    makeMessageDivs(props){
         let promptArray = props.prompts.split("|")
-        promptArray = promptArray.map( (msg) => {
-            if (msg.length > 10){
-                return msg
-            }
-        })
+        promptArray = promptArray.slice(0, promptArray.length - 1)
         return promptArray.map( (msg, index) => {
             return(
                 <p className="msg" key={index}>{msg}</p>
             )
         })
     }
-
-    return(
-        <div className="MessageScreen">
-            <div className="Actual">{makeMessageDivs(props)}</div>
-        </div>
-    )
+    render(){
+        return(
+            <div className="MessageScreen">
+                <div className="Actual">{this.makeMessageDivs(this.props)}</div>
+                <button className="continue" onClick={() => this.props.continue()}>Continue</button>
+            </div>
+        )
+    }
 }
 
-export default MessageScreen
+export default connect(
+    null,
+    mapDispatchToProps
+)(MessageScreen)

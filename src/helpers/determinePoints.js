@@ -14,6 +14,9 @@ export default function determinePoints(moveObj, attacker, target){
             actualDmg = parseInt(actualDmgFloat, 10)           
         }
         actualDmg = moveTypeWorker(moveObj, actualDmg, target)
+        if (actualDmg < 2 ){
+            actualDmg = 2
+        }
     }
     else{
         if (dam_type == "physical"){
