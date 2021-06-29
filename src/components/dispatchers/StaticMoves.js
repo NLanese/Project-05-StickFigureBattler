@@ -120,22 +120,6 @@ function processMoves(moveObj, props, oppMoveObj, dmg, oppDmg){
 
 class Move extends Component{
 
-    handleClick = (event, props) => {
-        let indexofMove = parseInt((event.target.offsetParent.id.split("e")[1]), 10)
-        let selMove = this.props.battle.user.moves[indexofMove]
-        console.log("Right above the bugged function")
-        let oppMoveObj = makeOppMoveSelection(props.battle.opp)
-        console.log("Right above the bugged function")
-        if (oppMoveObj != null){
-            props.chooseMove(selMove, props, oppMoveObj)
-        }
-        else{
-            console.log("It skipped the method again")
-            let oppMoveObj = props.battle.opp.moves[1]
-            props.chooseMove(selMove, props, oppMoveObj)
-        }
-    }
-
     // Will create a prompt that displays whether the move is damaging or healing
     pow_or_heal(dmg){
         if (dmg >= 0){

@@ -4,12 +4,30 @@ import { connect } from 'react-redux';
 
 const mapDispatchToProps = (dispatch) => {
     return({
-        continue: () => dispatch({type: 'MOVE_PROCESS_COMPLETE'})
+        continue: (props) => {
+            if (props.statusHandled == true){
+                dispatch({type: 'TURN_COMPLETE'})
+            }
+            else{
+                dispatch({type: 'STATUS_PROCESS'})
+            }
+        }
+    })
+}
+
+const mapStateToProps = (state) => {
+    return({
+        prompts: state.battle.prompt,
+        statusHandled: state.battle.statusHandled
     })
 }
 
 
 class MessageScreen extends Component{ 
+
+   handleClick = (props) => {
+       return this.props.continue(props)
+   }
 
     makeMessageDivs(props){
         let promptArray = props.prompts.split("|")
@@ -24,13 +42,13 @@ class MessageScreen extends Component{
         return(
             <div className="MessageScreen">
                 <div className="Actual">{this.makeMessageDivs(this.props)}</div>
-                <button className="continue" onClick={() => this.props.continue()}>Continue</button>
+                <button className="continue" onClick={() => this.handleClick(this.props)}>Continue</button>
             </div>
         )
     }
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(MessageScreen)

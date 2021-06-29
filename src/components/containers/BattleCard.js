@@ -31,7 +31,7 @@ class BattleCard extends Component{
               <FigureCard info={props.user}/>
             </div>
             <div className= "Healthbar">
-              <h3>Health: {props.battle.user.hp} / {props.user.hp}</h3>
+              <h3 className="health">Health: {props.battle.user.hp} / {props.user.hp}</h3>
               <p><strong>Current Status Effect: </strong>{props.battle.user.status}</p>
             </div>
         </div>
@@ -58,14 +58,14 @@ class BattleCard extends Component{
     if(props.battle.move_selection === true){
       return(
         <div className="MovesContainer">
-          <MovesContainer movesList={props.user.moves}/>
+          <MovesContainer />
         </div>
       )
     }
     else{
       return(
         <div className="MessageContainer">
-          <MessageScreen prompts={this.props.battle.prompt} />
+          <MessageScreen />
         </div>
       )
     }

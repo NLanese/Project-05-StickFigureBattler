@@ -12,7 +12,7 @@ export const MadScientistMoves = {
     // LEVEL UNLOCKED: [MOVES UNLOCKED]
         one: [8, 33], // lvl 1: Fire Bomb, Project Tr011
         two: [17, 13], // lvl 2: Freeze Ray, Sucker Punch
-        three: [16, 7, 18], // lvl 3: Raygun, Gunpowder Bomb, Robotic Barrage
+        three: [16, 18], // lvl 3: Raygun, Robotic Barrage
         four: [34, 37], // lvl 4: Forcefield, Know Your Enemy
         five: [21], // lvl 5: Electro Shock
         six: [31] // lvl 6: Systems Reboot
@@ -22,7 +22,7 @@ export const MartianMoves = {
     // LEVEL UNLOCKED: [MOVES UNLOCKED]
         one: [34, 22, 27], // lvl 1: Forcefield, Tackle, Regenerate
         two: [12], // lvl 2: Eye Lasers
-        three: [16, 9, 29], // lvl 3: Raygun, Ice Bomb, Robotic Barrage
+        three: [16, 29], // lvl 3: Raygun, Robotic Barrage
         four: [34, 37], // lvl 4: Forcefield, Know Your Enemy
         five: [19], // lvl 5: Optimize Attacks
         six: [36] // lvl 6: Noob Tube

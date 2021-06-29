@@ -60,7 +60,7 @@ export default function applyingStatusEffectandDamage(state, moveObj, whoIsAttac
     }
 
     // Handles attacks with no effects
-    else if (moveObj.effect == "none"){
+    else if (moveObj.effect == "none" || moveObj.effect == "move first" || moveObj.effect == "clear"){
         // Do nothing
     }
 
@@ -71,7 +71,9 @@ export default function applyingStatusEffectandDamage(state, moveObj, whoIsAttac
                 [other.tag]: {...returnState[other.tag], status: moveObj.effect, tEffected: 1},
                 prompt:  returnState.prompt +  ` ${other.name} has a new status effect!`
             }
-            debugger
+        }
+        else{
+            returnState = {...returnState}
         }
     }
 

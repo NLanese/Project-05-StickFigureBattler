@@ -3,10 +3,11 @@
 export function moveAction(moveObj, attacker){
     // Sets globals
     let dispatchType = ""
+    let effectOdds = Math.floor(Math.random() * 100)
 
     // Determines if status effect applies
     if (moveObj.effect == "blinding" || moveObj.effect == "burning" || moveObj.effect == "frozen" || moveObj.effect == "shock" || moveObj.effect == "poison"){
-        if (Math.random() < 0.6){
+        if ( effectOdds > moveObj.acc){
             moveObj.effect = "none"
         }
     }

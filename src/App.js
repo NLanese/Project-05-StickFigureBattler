@@ -3,7 +3,16 @@ import './App.css';
 import BattleCard from './components/containers/BattleCard';
 import React, { Component } from 'react';
 import CreationContainer from './components/dispatchers/CreationContainer';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 import Loading from './components/functional/Loading';
+import Failure from './components/functional/Failure';
+import LevelUp from './components/dispatchers/LevelUp';
+import Rules from './components/functional/Rules';
+import TypeChart from './components/functional/TypeChart.js';
+import NavBar from './components/containers/NavBar';
 
 const DOMAIN = "http://localhost:3000/"
 
@@ -58,9 +67,15 @@ class App extends Component {
     }
     else{
       return(
-        <div>
-          <BattleCard user={this.props.user} />
-        </div>
+        <Router>
+          <div>
+            <NavBar />
+            <Route exact path="/" component={BattleCard}/>
+            <Route exact path="/Rules" component={Rules}/>
+            <Route exact path="/TypeChart" component={TypeChart}/>
+            {/* <BattleCard user={this.props.user} /> */}
+          </div>
+        </Router>
       )
     }
   }
@@ -77,12 +92,27 @@ class App extends Component {
 
     // STARTS GAME ONCE USER IS CREATED
     else if (props.user.created === true){
+      if (props.battle.failed == true){
+        return(
+          <div className="FailBox">
+            <Failure />
+          </div>
+        )
+      }
+      else if (props.battle.levelUp === true){
+        return(
+          <div className="LevelBox">
+            <LevelUp user={props.user}/>
+          </div>
+        )
+      }
       return(
         <div className="BattleContainer">
           {this.battle_or_genButton(props)}
         </div>
       )
     }
+
 
     // BEFORE GAME, WHEN NO USER CREATED
     else{
@@ -94,7 +124,7 @@ class App extends Component {
     }
   }
 
-  render() {
+  render(){
     return (
       <div className="Main-Window">
         {this.intro_or_resume_or_loading(this.props)}

@@ -1,6 +1,5 @@
 export default function moveTypeWorker(moveObj, dmg, target){
 
-    console.log(moveObj)
     if (moveObj.name == "Tackle"){
         moveObj.type = "athletic"
     }

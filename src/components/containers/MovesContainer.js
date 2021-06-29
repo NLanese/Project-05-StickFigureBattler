@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import Move from '../dispatchers/Move';
+import { connect } from 'react-redux';
 import './MovesContainer.css'
+
+const mapStateToProps = (state) => {
+    return({
+        movesList: state.user.moves
+    })
+}
 
 class MovesContainer extends Component{
     
@@ -23,4 +30,4 @@ class MovesContainer extends Component{
     }
 }
 
-export default MovesContainer
+export default connect(mapStateToProps)(MovesContainer)
