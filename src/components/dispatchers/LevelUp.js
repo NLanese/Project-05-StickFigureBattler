@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { KnightMoves, MadScientistMoves, MartianMoves, PirateMoves, RobotMoves } from '../../helpers/when_moves_can_be_learned'
 import { connect } from 'react-redux'
 import getImage from '../../helpers/getImage'
+import movesList from '../../helpers/when_moves_can_be_learned'
 import './LevelUp.css'
-import { when } from 'q'
-
 
 
 const DOMAIN = "http://localhost:3000/"
@@ -22,24 +20,9 @@ const mapDispatchToProps = (dispatch) => {
             }
             else{
                 dispatch({type: `LOAD_FIGURE`})
-                let whenMoveAreLearned = null
-                let movesName = props.user.title
-                if (movesName == "Knight"){
-                    whenMoveAreLearned = KnightMoves
-                }
-                else if (movesName == "Mad Scientist"){
-                    whenMoveAreLearned = MadScientistMoves
-                }
-                else if (movesName == "Martian"){
-                    whenMoveAreLearned = MartianMoves
-                }
-                else if (movesName == "Pirate"){
-                    whenMoveAreLearned = PirateMoves
-                }
-                else if (movesName == "Robot"){
-                    whenMoveAreLearned = RobotMoves
-                }
+                let movesName = props.user.title.tr(" ", "")
                 let newMovesArray = []
+                let whenMoveAreLearned = movesList[movesName]
                 if (props.user.level + 1 == 2){
                     newMovesArray = whenMoveAreLearned.two
                 }
@@ -114,34 +97,38 @@ class LevelUp extends Component{
         }
         else{
             stat = event.target.className.split("_")[1]
+            stat = stat + "Boost"
             console.log(stat)
         }
+        this.setState({
+            ...this.state, [stat]: this.state[stat] + 1, incRemaining: this.state.incRemaining + 1
+        })
 
-        if (stat == ("sDef")){
-            this.setState({
-                ...this.state, sDefBoost: this.state.sDefBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
-            })
-        }
-        else if (stat == ("sAtk")){
-            this.setState({
-                ...this.state, sAtkBoost: this.state.sAtkBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
-            })
-        }
-        else if (stat == ("def")){
-            this.setState({
-                ...this.state, defBoost: this.state.defBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
-            })
-        }
-        else if (stat == ("atk")){
-            console.log("inside inc atk")
-            this.setState({
-                ...this.state, atkBoost: this.state.atkBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
-            })
-            console.log(this.state)
-        }
-        this.setState(
-            {...this.state, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1}
-        )
+        // if (stat == ("sDef")){
+        //     this.setState({
+        //         ...this.state, sDefBoost: this.state.sDefBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
+        //     })
+        // }
+        // else if (stat == ("sAtk")){
+        //     this.setState({
+        //         ...this.state, sAtkBoost: this.state.sAtkBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
+        //     })
+        // }
+        // else if (stat == ("def")){
+        //     this.setState({
+        //         ...this.state, defBoost: this.state.defBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
+        //     })
+        // }
+        // else if (stat == ("atk")){
+        //     console.log("inside inc atk")
+        //     this.setState({
+        //         ...this.state, atkBoost: this.state.atkBoost += 1, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1
+        //     })
+        //     console.log(this.state)
+        // }
+        // this.setState(
+        //     {...this.state, incRemaining: this.state.incRemaining - 1, remRemaining: this.state.remRemaining + 1}
+        // )
         return
     }
     handleRemClick = (event) => {

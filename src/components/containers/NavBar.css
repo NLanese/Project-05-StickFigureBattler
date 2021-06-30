@@ -2,17 +2,25 @@
     top: 0%;
     left: 100px;
     position: absolute;
-
+    color: red;
+    border: 2px solid black;
+    background-color: lightgrey;
 }
 
 #RulesRoute{
     top: 0%;
     left: 200px;
     position: absolute;
+    color: red;
+    border: 2px solid black;
+    background-color: lightgrey;
 }
 
 #TypeRoute{
     top: 0%;
     position: absolute;
     left: 300px;
+    color: red;
+    border: 2px solid black;
+    background-color: lightgrey;
 }

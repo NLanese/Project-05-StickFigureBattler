@@ -33,7 +33,8 @@ class HeroSelection extends Component{
         // This will return an array of divs to be rendered. It maps through the newly created heroArray
         return heroArray.map( (hero) => {
             return(
-                <th className= "HeroCard" id={hero.name} key={hero.name} onClick = {(event) => this.selectFigure(event)}>
+                <th className= "HeroCard" id={hero.name} key={hero.name} >
+                {/* onClick = {(event) => this.selectFigure(event)}> */}
                     <BioCard hero={hero} />
                 </th>
             )

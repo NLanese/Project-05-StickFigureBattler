@@ -1,46 +1,15 @@
 import { connect } from 'react-redux';
 import './App.css';
-import BattleCard from './components/containers/BattleCard';
 import React, { Component } from 'react';
 import CreationContainer from './components/dispatchers/CreationContainer';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
 import Loading from './components/functional/Loading';
-import Failure from './components/functional/Failure';
-import LevelUp from './components/dispatchers/LevelUp';
-import Rules from './components/functional/Rules';
-import TypeChart from './components/functional/TypeChart.js';
-import NavBar from './components/containers/NavBar';
+import { FailureOrLevel } from './components/containers/FailureOrLevel';
+import GenButtonOrBattle from './components/containers/GenButtonOrBattle';
+
 
 const DOMAIN = "http://localhost:3000/"
 
-function fetchOpp(props){
-  let user = props.user
-  let level = user.level
-  let route = ""
-  if (level == 1){
-    route = "first_battle"
-  }
-  else if (level == 2){
-    route = "second_battle"
-  }
-  else if (level == 3){
-    route = "third_battle"
-  }
-  return (dispatch) => {
-    dispatch({type: 'LOAD_BATTLE'})
-    fetch(DOMAIN + route)
-      .then(resp => resp.json())
-      .then(json => { 
-        dispatch(props.setUpUser(user))
-        return {hp: json.hp, created: true, name: json.name, title: json.title, level: json.level, type: json.class_type,
-               spd: json.spd, atk: json.atk, def: json.def, sDef: json.sDef, sAtk: json.sAtk, moves: json.moves} 
-      })
-      .then(opponent => dispatch({type: 'START_BATTLE', oppo: opponent, user: user}))
-  }
-} 
+// SETS UP THE OPPONENT FIGURE AND OPP FIGURE'S MOVES
 
 const mapDispatchToProps = (dispatch) => {
   return ({
@@ -56,31 +25,8 @@ const mapStateToProps = (state) => {
 
 class App extends Component {
 
-  // MAKES YOU GENERATE EACH NEW BATTLE TO FETCH PROPERLY
-  battle_or_genButton = (props) => {
-    if (props.battle.opp.created == false){
-      return(
-        <div>
-          <button id="generation" onClick = {() => props.setUpOpp(props)}>Generate Battle!</button>
-        </div>
-      )
-    }
-    else{
-      return(
-        <Router>
-          <div>
-            <NavBar />
-            <Route exact path="/" component={BattleCard}/>
-            <Route exact path="/Rules" component={Rules}/>
-            <Route exact path="/TypeChart" component={TypeChart}/>
-            {/* <BattleCard user={this.props.user} /> */}
-          </div>
-        </Router>
-      )
-    }
-  }
-
   // IF LOADING AT ANY POINT
+  // user.loading == true, battle.loading == true
   intro_or_resume_or_loading = (props) => {
     if (props.user.loading === true || props.battle.loading === true){
       return(
@@ -91,30 +37,24 @@ class App extends Component {
     }
 
     // STARTS GAME ONCE USER IS CREATED
-    else if (props.user.created === true){
-      if (props.battle.failed == true){
-        return(
-          <div className="FailBox">
-            <Failure />
-          </div>
-        )
-      }
-      else if (props.battle.levelUp === true){
-        return(
-          <div className="LevelBox">
-            <LevelUp user={props.user}/>
-          </div>
-        )
-      }
+    // user.created == true
+    else if (props.user.created === true || props.battle.levelUp === true){
       return(
-        <div className="BattleContainer">
-          {this.battle_or_genButton(props)}
+        <div>
+          <FailureOrLevel user={props.user} battle={props.battle} />
         </div>
       )
     }
 
+    else if (props.user.created == true){
+      <div>
+        <GenButtonOrBattle battle={props.battle} />
+      </div>
+    }
+
 
     // BEFORE GAME, WHEN NO USER CREATED
+    // user.created == false
     else{
       return(
         <div className="Create Form">
