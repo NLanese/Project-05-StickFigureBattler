@@ -3,10 +3,10 @@ import {
     Route
   }
 from 'react-router-dom';
-import BattleCard from './components/containers/BattleCard';
-import Rules from './components/functional/Rules';
-import TypeChart from './components/functional/TypeChart.js';
-import NavBar from './components/containers/NavBar';
+import BattleCard from '/BattleCard.js'
+import Rules from '../functional/Rules';
+import TypeChart from '../functional/TypeChart.js';
+import NavBar from './NavBar';
 import { connect } from 'react-redux';
 
 function fetchOpp(props){

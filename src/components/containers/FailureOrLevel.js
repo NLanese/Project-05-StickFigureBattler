@@ -1,5 +1,5 @@
-import Failure from './components/functional/Failure';
-import LevelUp from './components/dispatchers/LevelUp';
+import Failure from '../functional/Failure';
+import LevelUp from '../dispatchers/LevelUp';
 
 export const FailureOrLevel = (props) => {
     if (props.user.created === true){
